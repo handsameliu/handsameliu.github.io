@@ -99,7 +99,7 @@
 <meta property="og:site_name" content="handsameliu">
 <meta property="og:description" content="准备工作">
 <meta property="og:image" content="http://yoursite.com/img/20170704151457.jpg">
-<meta property="og:updated_time" content="2017-07-04T08:50:18.154Z">
+<meta property="og:updated_time" content="2017-07-04T08:55:54.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo+github.io建立轻博客">
 <meta name="twitter:description" content="准备工作">
@@ -375,12 +375,12 @@
 
       
         <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><a id="more"></a>
-<p>使用hexo前需要安装nodejs以及git。可以到官方进行下载<a href="&#39;https://nodejs.org/en/&#39;nodejs">nodejs</a>，<a href="&#39;https://git-scm.com/download/&#39;">git</a></p>
-<p>git安装完成后需要创建对应的仓库。</p>
+<p>使用hexo前需要安装nodejs以及git。可以到官方进行下载<a href="https://nodejs.org/en/" target="_blank" rel="external">nodejs</a>，<a href="https://git-scm.com/download/" target="_blank" rel="external">git</a></p>
+<h3 id="设置github仓库"><a href="#设置github仓库" class="headerlink" title="设置github仓库"></a>设置github仓库</h3><p>git安装完成后需要创建对应的仓库。可到 <a href="https://github.com" target="_blank" rel="external">github.com</a></p>
 <blockquote>
-<p><em>重要：</em>名称要起为 <code>你的github名称.github.io</code> 。这里建议你这么起名，因为github默认这样解析。你也可以起其他的名字，因为github已经对你的账户默认绑定了一个域名<code>你的github名称.github.io</code>，你起一个其他名字的话就算是单独的子网页了(访问的时候不方便)。</p>
+<p><strong>重要：</strong>名称要起为 <code>你的github名称.github.io</code> 。这里建议你这么起名，因为github默认这样解析。你也可以起其他的名字，因为github已经对你的账户默认绑定了一个域名<code>你的github名称.github.io</code>，你起一个其他名字的话就算是单独的子网页了(访问的时候不方便)。</p>
 </blockquote>
-<p><strong>重要：</strong> 起好名字后需要到项目的设置<code>setings</code>中设置 <code>github pages</code>选项，可以直接设置Source的值为master。(貌似现在默认就是master了)。至于模版<code>Theme Chooser</code>不选也可以的。</p>
+<p><strong>重要：</strong> 起好名字后需要到项目的设置<code>setings</code>中设置 <code>github pages</code>选项，可以直接设置<code>Source</code>的值为<code>master</code>。(貌似现在默认就是master了)。至于模版<code>Theme Chooser</code>不选也可以的。</p>
 <p>上传前还要确定自己本地的git已经生成了公钥并且绑定了自己的github。</p>
 <p>安装完成后就可以安装hexo了,最好先建立一个独立的文件夹然后在这个文件夹进行一下步骤</p>
 <h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-cli -g	# 全局安装</div><div class="line">$ hexo init blog # 这个名字可以随便起，反正最后都要转移到git项目中</div><div class="line">$ cd blog	</div><div class="line">$ npm install	# 安装依赖</div><div class="line">$ hexo g # hexo generate的简写</div><div class="line">$ hexo s # hexo server的简写</div></pre></td></tr></table></figure>
@@ -749,7 +749,7 @@ hexo d #部署 #可与hexo g合并为 hexo d -g  会将当前的markdown文档�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.1.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换默认主题"><span class="nav-number">2.2.</span> <span class="nav-text">更换默认主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义主题内容"><span class="nav-number">2.3.</span> <span class="nav-text">自定义主题内容</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置github仓库"><span class="nav-number">1.1.</span> <span class="nav-text">设置github仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.1.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更换默认主题"><span class="nav-number">2.2.</span> <span class="nav-text">更换默认主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义主题内容"><span class="nav-number">2.3.</span> <span class="nav-text">自定义主题内容</span></a></li></ol></li></ol></div>
             
 
           </div>
