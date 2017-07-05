@@ -1,0 +1,926 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="总结,mongodb,mongoose," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="mongoose常用方法  参考 http://www.nodeclass.com/api/mongoose.html参考 http://mongoosejs.com/docs/api.html">
+<meta name="keywords" content="总结,mongodb,mongoose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mongoose常用方法">
+<meta property="og:url" content="http://yoursite.com/2017/07/05/mongoose常用方法/index.html">
+<meta property="og:site_name" content="handsameliu">
+<meta property="og:description" content="mongoose常用方法  参考 http://www.nodeclass.com/api/mongoose.html参考 http://mongoosejs.com/docs/api.html">
+<meta property="og:updated_time" content="2017-07-05T02:20:26.194Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mongoose常用方法">
+<meta name="twitter:description" content="mongoose常用方法  参考 http://www.nodeclass.com/api/mongoose.html参考 http://mongoosejs.com/docs/api.html">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/05/mongoose常用方法/"/>
+
+
+
+
+
+  <title>mongoose常用方法 | handsameliu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">handsameliu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">精神性洁癖的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/05/mongoose常用方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="handsameliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/useravatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="handsameliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mongoose常用方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-05T10:17:32+08:00">
+                2017-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/mongodb/" itemprop="url" rel="index">
+                    <span itemprop="name">mongodb</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/mongodb/mongoose/" itemprop="url" rel="index">
+                    <span itemprop="name">mongoose</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>mongoose常用方法</p>
+<blockquote>
+<p>参考 <a href="http://www.nodeclass.com/api/mongoose.html" target="_blank" rel="external">http://www.nodeclass.com/api/mongoose.html</a><br>参考 <a href="http://mongoosejs.com/docs/api.html" target="_blank" rel="external">http://mongoosejs.com/docs/api.html</a>    </p>
+</blockquote>
+<a id="more"></a>
+<h3 id="Model-find"><a href="#Model-find" class="headerlink" title="Model.find"></a>Model.find</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Model.find(query, fields, options, callback)</div><div class="line"><span class="comment">// 共四个参数，但是fields 和 options 都是可选参数</span></div><div class="line"><span class="comment">// 参数1忽略,或为空对象则返回所有集合文档</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>一般使用方法</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123; <span class="string">'性别'</span>: <span class="string">'0'</span> &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, docs</span>) </span>&#123; <span class="comment">// docs 是查询的结果数组，默认返回单条内所有字段数据 &#125;);</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>返回指定键数据的方法（过滤查询）</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;&#125;, [<span class="string">'age'</span>, <span class="string">'name'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">err, docs</span>) </span>&#123;</div><div class="line">  <span class="comment">// docs 此时只包含文档的部分键值</span></div><div class="line">  <span class="comment">// 参数2页可使用对象  &#123;'name':1,'age':0&#125; 查询文档的返回结果包含name , 不包含age.(_id默认是1)</span></div><div class="line">&#125;)</div><div class="line"></div><div class="line">Model.find(&#123;&#125;,<span class="literal">null</span>,&#123;<span class="attr">limit</span>:<span class="number">20</span>&#125;);		<span class="comment">//过滤查询,参数3: 游标操作 limit限制返回结果数量为20个,如不足20个则返回所有.</span></div></pre></td></tr></table></figure>
+<h3 id="Model-findOne"><a href="#Model-findOne" class="headerlink" title="Model.findOne"></a>Model.findOne</h3><blockquote>
+<p>与 Model.find 相同，但只返回查询到的第一个文档对象，</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Model.findOne(&#123;<span class="string">'age'</span>: <span class="number">18</span>&#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, doc</span>)</span>&#123;</div><div class="line">  <span class="comment">// doc 是单个文档对象</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="Model-findById"><a href="#Model-findById" class="headerlink" title="Model.findById"></a>Model.findById</h3><blockquote>
+<p>与 findOne 相同，但它接收文档的 _id 作为参数，返回单个文档。_id 可以是字符串或 ObjectId 对象。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Model.findById(obj._id, <span class="function"><span class="keyword">function</span> (<span class="params">err, doc</span>)</span>&#123;</div><div class="line">  <span class="comment">// doc 是单个文档</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="Model-count"><a href="#Model-count" class="headerlink" title="Model.count"></a>Model.count</h3><blockquote>
+<p>返回符合条件的文档数。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.count(conditions, callback);</div></pre></td></tr></table></figure>
+<h3 id="Model-create"><a href="#Model-create" class="headerlink" title="Model.create"></a>Model.create</h3><blockquote>
+<p>在集合中创建一个文档</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.create(&#123;&apos;name&apos;:&apos;liu&apos;,&apos;age&apos;:18&#125;, callback))</div></pre></td></tr></table></figure>
+<h3 id="Model-remove"><a href="#Model-remove" class="headerlink" title="Model.remove"></a>Model.remove</h3><blockquote>
+<p>删除符合条件的文档。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.remove(conditions, callback);</div></pre></td></tr></table></figure>
+<h3 id="Model-distinct"><a href="#Model-distinct" class="headerlink" title="Model.distinct"></a>Model.distinct</h3><blockquote>
+<p>查询符合条件的文档并返回根据键分组的结果。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.distinct(field, conditions, callback);</div></pre></td></tr></table></figure>
+<h3 id="Model-where"><a href="#Model-where" class="headerlink" title="Model.where"></a>Model.where</h3><blockquote>
+<p>当查询条件比较复杂时使用where语句</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Model</div><div class="line">	.where(<span class="string">'age'</span>).gte(<span class="number">25</span>)</div><div class="line">	.where(<span class="string">'tags'</span>).in([<span class="string">'movie'</span>, <span class="string">'music'</span>, <span class="string">'art'</span>])</div><div class="line">	.select(<span class="string">'name'</span>, <span class="string">'age'</span>, <span class="string">'tags'</span>)</div><div class="line">	.skip(<span class="number">20</span>)</div><div class="line">	.limit(<span class="number">10</span>)</div><div class="line">	.asc(<span class="string">'age'</span>)</div><div class="line">	.slaveOk()</div><div class="line">	.hint(&#123; <span class="attr">age</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="number">1</span> &#125;)</div><div class="line">	.run(callback);</div></pre></td></tr></table></figure>
+<h3 id="Model-where-1"><a href="#Model-where-1" class="headerlink" title="Model.$where"></a>Model.$where</h3><blockquote>
+<p>有时我们需要在 mongodb 中使用 javascript 表达式进行查询，这时可以用 find({$where : javascript}) 方式，$where 是一种快捷方式，并支持链式调用查询。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.$where(<span class="string">'this.firstname === this.lastname'</span>).exec(callback)</div></pre></td></tr></table></figure>
+<h3 id="Model-update"><a href="#Model-update" class="headerlink" title="Model.update"></a>Model.update</h3><blockquote>
+<p>使用 update 子句更新符合指定条件的文档.<br>更新数据在发送到数据库服务器之前会改变模型的类型。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> conditions = &#123; <span class="attr">name</span>: <span class="string">'borne'</span> &#125;, update = &#123; <span class="attr">$inc</span>: &#123; <span class="attr">visits</span>: <span class="number">1</span> &#125;&#125;, options = &#123; <span class="attr">multi</span>: <span class="literal">true</span> &#125;;</div><div class="line">Model.update(conditions, update, options, callback)</div><div class="line"><span class="comment">// 参数1:查询条件, 参数2:更新对象,可以使用MondoDB的更新修改器</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：为了向后兼容，所有顶级更新键如果不是原子操作命名的，会统一被按 $set 操作处理，例如：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> query = &#123; <span class="attr">name</span>: <span class="string">'borne'</span> &#125;;</div><div class="line">Model.update(query, &#123; <span class="attr">name</span>: <span class="string">'jason borne'</span> &#125;, options, callback)</div><div class="line"></div><div class="line"><span class="comment">// 会被这样发送到数据库服务器，可以直接写成这个样子</span></div><div class="line"></div><div class="line">Model.update(query, &#123; <span class="attr">$set</span>: &#123; <span class="attr">name</span>: <span class="string">'jason borne'</span> &#125;&#125;, options, callback)</div></pre></td></tr></table></figure>
+<h3 id="查询-API"><a href="#查询-API" class="headerlink" title="查询 API"></a>查询 API</h3><blockquote>
+<p>如果不提供回调函数，所有这些方法都返回 Query 对象，它们都可以被再次修改（比如增加选项、键等），直到调用 exec 方法。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> query = Model.find(&#123;&#125;);</div><div class="line"></div><div class="line">query.where(<span class="string">'field'</span>, <span class="number">5</span>);</div><div class="line">query.limit(<span class="number">5</span>);</div><div class="line">query.skip(<span class="number">100</span>);</div><div class="line"></div><div class="line">query.exec(<span class="function"><span class="keyword">function</span> (<span class="params">err, docs</span>) </span>&#123;</div><div class="line">  <span class="comment">// called when the `query.complete` or `query.error` are called</span></div><div class="line">  <span class="comment">// internally</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="修改器和更新器"><a href="#修改器和更新器" class="headerlink" title="修改器和更新器"></a>修改器和更新器</h3><h4 id="更新修改器"><a href="#更新修改器" class="headerlink" title="更新修改器:"></a>更新修改器:</h4><p><strong>‘$inc’</strong> :增减修改器,只对数字有效.下面的实例: 找到 age=22的文档,修改文档的age值自增1</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$inc&apos;:{&apos;age&apos;:1} } ); // 执行后: age=23
+</code></pre><p><strong>‘$set’</strong> :指定一个键的值,这个键不存在就创建它.可以是任何MondoDB支持的类型.</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$set&apos;:{&apos;age&apos;:&apos;haha&apos;} } ); // 执行后: age=&apos;haha&apos;
+</code></pre><p><strong>‘$unset’</strong> :同上取反,删除一个键</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$unset&apos;:{&apos;age&apos;:&apos;haha&apos;} } ); // 执行后: age键不存在
+</code></pre><h4 id="数组修改器"><a href="#数组修改器" class="headerlink" title="数组修改器:"></a>数组修改器:</h4><p><strong>‘$push’</strong> :给一个键push一个数组成员,键不存在会创建</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$push&apos;:{&apos;array&apos;:10} } ); // 执行后: 增加一个 array 键,类型为数组, 有一个成员 10
+</code></pre><p><strong>‘$addToSet’</strong> :向数组中添加一个元素,如果存在就不添加</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$addToSet&apos;:{&apos;array&apos;:10} } ); // 执行后: array中有10所以不会添加
+</code></pre><p><strong>‘$each’</strong> :遍历数组, 和 $push 修改器配合可以插入多个值</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$push&apos;:{&apos;array&apos;:{&apos;$each&apos;: [1,2,3,4,5]}} } ); // 执行后: array : [10,1,2,3,4,5]
+</code></pre><p><strong>‘$pop’</strong> :向数组中尾部删除一个元素</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$pop&apos;:{&apos;array&apos;:1} } ); // 执行后: array : [10,1,2,3,4] tips: 将1改成-1可以删除数组首部元素
+</code></pre><p><strong>‘$pull’</strong> :向数组中删除指定元素</p>
+<pre><code>Model.update({&apos;age&apos;:22}, {&apos;$pull&apos;:{&apos;array&apos;:10} } ); // 执行后: array : [1,2,3,4] 匹配到array中的10后将其删除
+</code></pre><h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询:"></a>条件查询:</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">条件</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$lt</td>
+<td style="text-align:left">小于</td>
+</tr>
+<tr>
+<td style="text-align:left">$lte</td>
+<td style="text-align:left">小于等于</td>
+</tr>
+<tr>
+<td style="text-align:left">$gt</td>
+<td style="text-align:left">大于</td>
+</tr>
+<tr>
+<td style="text-align:left">$gte</td>
+<td style="text-align:left">大于等于</td>
+</tr>
+<tr>
+<td style="text-align:left">$ne</td>
+<td style="text-align:left">不等于</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="string">"age"</span>:&#123; <span class="string">"$get"</span>:<span class="number">18</span> , <span class="string">"$lte"</span>:<span class="number">30</span> &#125; &#125; );</div><div class="line"><span class="comment">// 查询 age 大于等于18并小于等于30的文档</span></div></pre></td></tr></table></figure>
+<h4 id="或查询-OR"><a href="#或查询-OR" class="headerlink" title="或查询 OR:"></a>或查询 OR:</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">条件</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$in</td>
+<td style="text-align:left">一个键对应多个值</td>
+</tr>
+<tr>
+<td style="text-align:left">$nin</td>
+<td style="text-align:left">同上取反, 一个键不对应指定值</td>
+</tr>
+<tr>
+<td style="text-align:left">$or</td>
+<td style="text-align:left">多个条件匹配, 可以嵌套 $in 使用</td>
+</tr>
+<tr>
+<td style="text-align:left">$not</td>
+<td style="text-align:left">同上取反, 查询与特定模式不匹配的文档</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="string">"age"</span>:&#123; <span class="string">"$in"</span>:[<span class="number">20</span>,<span class="number">21</span>,<span class="number">22.</span><span class="string">'haha'</span>]&#125; &#125; );</div><div class="line"><span class="comment">// 查询 age等于20或21或21或'haha'的文档</span></div><div class="line"></div><div class="line">Model.find(&#123;<span class="string">"$or"</span> : [ &#123;<span class="string">'age'</span>:<span class="number">18</span>&#125; , &#123;<span class="string">'name'</span>:<span class="string">'xueyou'</span>&#125; ] &#125;); </div><div class="line"><span class="comment">// 查询 age等于18 或 name等于'xueyou' 的文档</span></div></pre></td></tr></table></figure>
+<h4 id="类型查询"><a href="#类型查询" class="headerlink" title="类型查询:"></a>类型查询:</h4><p>null 能匹配自身和不存在的值, 想要匹配键的值 为null, 就要通过 “$exists” 条件判定键值已经存在 “$exists” (表示是否存在的意思)</p>
+<blockquote>
+<p>Model.find(“age” : { “$in” : [null] , “exists” : true } ); 查询 age值为null的文档</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="attr">name</span>: &#123;<span class="attr">$exists</span>: <span class="literal">true</span>&#125;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</div><div class="line">  <span class="comment">//查询所有存在name属性的文档</span></div><div class="line">&#125;);</div><div class="line"></div><div class="line">Model.find(&#123;<span class="attr">telephone</span>: &#123;<span class="attr">$exists</span>: <span class="literal">false</span>&#125;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error,docs</span>)</span>&#123;</div><div class="line">  <span class="comment">//查询所有不存在telephone属性的文档</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式:"></a>正则表达式:</h4><p>MongoDb 使用 Prel兼容的正则表达式库来匹配正则表达式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">find( &#123;<span class="string">"name"</span> : <span class="regexp">/joe/i</span> &#125; )</div><div class="line">查询name为 joe 的文档, 并忽略大小写</div><div class="line"></div><div class="line">find( &#123;<span class="string">"name"</span> : <span class="regexp">/joe?/i</span> &#125; ) 查询匹配各种大小写组合</div></pre></td></tr></table></figure>
+<h4 id="查询数组"><a href="#查询数组" class="headerlink" title="查询数组:"></a>查询数组:</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="string">"array"</span>:<span class="number">10</span>&#125; ); </div><div class="line"><span class="comment">// 查询 array(数组类型)键中有10的文档, array : [1,2,3,4,5,10] 会匹配到</span></div><div class="line"></div><div class="line">Model.find(&#123;<span class="string">"array[5]"</span>:<span class="number">10</span>&#125; ); </div><div class="line"><span class="comment">// 查询 array(数组类型)键中下标5对应的值是10, array : [1,2,3,4,5,10] 会匹配到</span></div></pre></td></tr></table></figure>
+<h4 id="‘-all’-匹配数组中多个元素"><a href="#‘-all’-匹配数组中多个元素" class="headerlink" title="‘$all’ 匹配数组中多个元素"></a>‘$all’ 匹配数组中多个元素</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="string">"array"</span>:[<span class="number">5</span>,<span class="number">10</span>]&#125; ); 查询 匹配array数组中 既有<span class="number">5</span>又有<span class="number">10</span>的文档</div></pre></td></tr></table></figure>
+<h4 id="‘-size’-匹配数组长度"><a href="#‘-size’-匹配数组长度" class="headerlink" title="‘$size’ 匹配数组长度"></a>‘$size’ 匹配数组长度</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="string">"array"</span>:&#123;<span class="string">"$size"</span> : <span class="number">3</span>&#125; &#125; ); 查询 匹配array数组长度为<span class="number">3</span> 的文档</div></pre></td></tr></table></figure>
+<h4 id="‘-slice’-查询子集合返回"><a href="#‘-slice’-查询子集合返回" class="headerlink" title="‘$slice’ 查询子集合返回"></a>‘$slice’ 查询子集合返回</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Model.find(&#123;<span class="string">"array"</span>:&#123;<span class="string">"$skice"</span> : <span class="number">10</span>&#125; &#125; ); </div><div class="line"><span class="comment">// 查询 匹配array数组的前10个元素</span></div><div class="line">Model.find(&#123;<span class="string">"array"</span>:&#123;<span class="string">"$skice"</span> : [<span class="number">5</span>,<span class="number">10</span>] &#125; &#125; ); </div><div class="line"><span class="comment">// 查询 匹配array数组的第5个到第10个元素</span></div></pre></td></tr></table></figure>
+<h4 id="where"><a href="#where" class="headerlink" title="where"></a>where</h4><p>用它可以执行任意javacript语句作为查询的一部分,如果回调函数返回 true 文档就作为结果的一部分返回</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">find(&#123;<span class="string">"$where"</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">for</span>( <span class="keyword">var</span> x <span class="keyword">in</span> <span class="keyword">this</span> )&#123;</div><div class="line">	 <span class="comment">//这个函数中的 this 就是文档</span></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.x !== <span class="literal">null</span> &amp;&amp; <span class="keyword">this</span>.y !== <span class="literal">null</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.x + <span class="keyword">this</span>.y === <span class="number">10</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 简化版本</span></div><div class="line"></div><div class="line">find( &#123;<span class="string">"$where"</span>:<span class="string">"this.x + this.y === 10"</span>&#125;)</div><div class="line">find( &#123;<span class="string">"$where"</span>:<span class="string">"function()&#123;return this.x + this.y ===10;&#125;"</span>&#125;)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+            <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          
+            <a href="/tags/mongoose/" rel="tag"># mongoose</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/05/mongoose基础/" rel="next" title="mongoose基础使用方法">
+                <i class="fa fa-chevron-left"></i> mongoose基础使用方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/05/angular/" rel="prev" title="angular">
+                angular <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/useravatar.png"
+               alt="handsameliu" />
+          <p class="site-author-name" itemprop="name">handsameliu</p>
+           
+              <p class="site-description motion-element" itemprop="description">工作五年的初级程序员--自认为拥有小小的帅气 ^_^ </p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/handsameliu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2093882590" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-find"><span class="nav-number">1.</span> <span class="nav-text">Model.find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-findOne"><span class="nav-number">2.</span> <span class="nav-text">Model.findOne</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-findById"><span class="nav-number">3.</span> <span class="nav-text">Model.findById</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-count"><span class="nav-number">4.</span> <span class="nav-text">Model.count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-create"><span class="nav-number">5.</span> <span class="nav-text">Model.create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-remove"><span class="nav-number">6.</span> <span class="nav-text">Model.remove</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-distinct"><span class="nav-number">7.</span> <span class="nav-text">Model.distinct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-where"><span class="nav-number">8.</span> <span class="nav-text">Model.where</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-where-1"><span class="nav-number">9.</span> <span class="nav-text">Model.$where</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Model-update"><span class="nav-number">10.</span> <span class="nav-text">Model.update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询-API"><span class="nav-number">11.</span> <span class="nav-text">查询 API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改器和更新器"><span class="nav-number">12.</span> <span class="nav-text">修改器和更新器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#更新修改器"><span class="nav-number">12.1.</span> <span class="nav-text">更新修改器:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组修改器"><span class="nav-number">12.2.</span> <span class="nav-text">数组修改器:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件查询"><span class="nav-number">12.3.</span> <span class="nav-text">条件查询:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#或查询-OR"><span class="nav-number">12.4.</span> <span class="nav-text">或查询 OR:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型查询"><span class="nav-number">12.5.</span> <span class="nav-text">类型查询:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正则表达式"><span class="nav-number">12.6.</span> <span class="nav-text">正则表达式:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询数组"><span class="nav-number">12.7.</span> <span class="nav-text">查询数组:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#‘-all’-匹配数组中多个元素"><span class="nav-number">12.8.</span> <span class="nav-text">‘$all’ 匹配数组中多个元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#‘-size’-匹配数组长度"><span class="nav-number">12.9.</span> <span class="nav-text">‘$size’ 匹配数组长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#‘-slice’-查询子集合返回"><span class="nav-number">12.10.</span> <span class="nav-text">‘$slice’ 查询子集合返回</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#where"><span class="nav-number">12.11.</span> <span class="nav-text">where</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">handsameliu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

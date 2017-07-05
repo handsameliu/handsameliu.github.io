@@ -1,0 +1,795 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js,react,redux," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="同事离职，之前他一人负责微信端的开发。不得不吐槽由于近期物价上涨，找一个价格合理的前端是很难的，这也是他跳槽的原因，因为他在这方面确实做得很不错。他留下一个交接文档，沟通几分钟后就没有然后了。自学吧">
+<meta name="keywords" content="js,react,redux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react+redux">
+<meta property="og:url" content="http://yoursite.com/2017/07/05/react+redux/index.html">
+<meta property="og:site_name" content="handsameliu">
+<meta property="og:description" content="同事离职，之前他一人负责微信端的开发。不得不吐槽由于近期物价上涨，找一个价格合理的前端是很难的，这也是他跳槽的原因，因为他在这方面确实做得很不错。他留下一个交接文档，沟通几分钟后就没有然后了。自学吧">
+<meta property="og:updated_time" content="2017-07-05T02:07:31.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react+redux">
+<meta name="twitter:description" content="同事离职，之前他一人负责微信端的开发。不得不吐槽由于近期物价上涨，找一个价格合理的前端是很难的，这也是他跳槽的原因，因为他在这方面确实做得很不错。他留下一个交接文档，沟通几分钟后就没有然后了。自学吧">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/05/react+redux/"/>
+
+
+
+
+
+  <title>react+redux | handsameliu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">handsameliu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">精神性洁癖的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/05/react+redux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="handsameliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/useravatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="handsameliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react+redux</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-05T09:55:08+08:00">
+                2017-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/react/" itemprop="url" rel="index">
+                    <span itemprop="name">react</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/react/redux/" itemprop="url" rel="index">
+                    <span itemprop="name">redux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>同事离职，之前他一人负责微信端的开发。不得不吐槽由于近期物价上涨，找一个价格合理的前端是很难的，这也是他跳槽的原因，因为他在这方面确实做得很不错。<br>他留下一个交接文档，沟通几分钟后就没有然后了。自学吧</p>
+<a id="more"></a>
+<blockquote>
+<p>项目由react+redux+webpack搭建使用react-weui写页面，后台接口node提供，也需要自己写。所以需要学习的还有很多。</p>
+<p>根据目录中文件的功能来介绍，估计只有我自己懂是啥意思了。</p>
+<p>webpack先不理会，目前已经配置好了。</p>
+<p>我认为以下是快速上手文档，记住了步骤可以再深入研究</p>
+</blockquote>
+<p><code>Components</code>: 放置UI组件（页面中所有渲染的内容。负责渲染和吧从Container里拿到的数据放到页面上）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">const</span> 变量名=<span class="function">(<span class="params">props</span>)=&gt;</span>&#123;</div><div class="line">    <span class="keyword">let</span> data = props.state.data;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">        &lt;Page className="panel"&gt;</div><div class="line">			...</div><div class="line">        &lt;/Page&gt;</div><div class="line">    )</div><div class="line">&#125;;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> 变量名;</div></pre></td></tr></table></figure>
+<p><code>Containers</code>: 放置容器组件（负责管理数据和业务逻辑），由两个方法组成mapStateToProps,mapDispatchToProps</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;connect&#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>;</div><div class="line"><span class="keyword">import</span> UI组件 <span class="keyword">from</span> <span class="string">'../components/UI组件'</span>;</div><div class="line"><span class="keyword">import</span> &#123;init&#125; <span class="keyword">from</span> <span class="string">'../action/actionName'</span></div><div class="line"><span class="keyword">const</span> mapStateToProps=<span class="function">(<span class="params">state</span>)=&gt;</span>&#123;</div><div class="line">     <span class="keyword">return</span>&#123;</div><div class="line">        <span class="attr">state</span>:state.data</div><div class="line">     &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">const</span> mapDispatchToProps=<span class="function">(<span class="params">dispatch,props</span>)=&gt;</span>&#123;</div><div class="line">    dispatch(init());							<span class="comment">//当页面加载时需要执行方法要加在这里</span></div><div class="line">    <span class="keyword">return</span>&#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> connect(mapStateToProps,mapDispatchToProps)(UI组件);</div></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>connect方法主要有两个参数，mapStateToProps主要将state映射到UI组件的参数（props），mapDispatchToProps主要将action映射到UI组件的参数（props）</li>
+<li>mapDispatchToProps中拿到state，return后，在对应的components的props上就可以拿到这些state对页面进行渲染了。mapDispatchToProps也是同理，在props中也可以访问到相应的逻辑方法。</li>
+</ol>
+</blockquote>
+<p><code>Reducer</code>：包含一系列的Reducer，他接受Action和当前State作为参数，返回一个新的State（这个文件中可以定义初始化的state）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//	以下代码可固定写死，当有多个state时增加switch中的case即可。</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> Immutable <span class="keyword">from</span> <span class="string">'immutable'</span>;</div><div class="line"><span class="keyword">import</span> &#123;UPDATE_STATUS&#125; <span class="keyword">from</span> <span class="string">'../actions/文件名'</span>;  </div><div class="line"></div><div class="line"><span class="keyword">const</span> 方法名 = <span class="function">(<span class="params">state=initState,action</span>)=&gt;</span>&#123;</div><div class="line">    <span class="keyword">let</span> next_state = Immutable.fromJS(state);</div><div class="line">    <span class="keyword">switch</span>(action.type)&#123;</div><div class="line">        <span class="keyword">case</span> UPDATE_STATUS:</div><div class="line">            <span class="keyword">return</span> next_state.set(action.key,action.value).toJS();</div><div class="line">        <span class="keyword">default</span>:<span class="keyword">return</span> state;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> 方法名;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>在Reducer中可以将多个小的reducer合并成一个大的reducer，这样也方便管理。<br>可以使用redux中的 combineReducers 合并。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;combineReducers&#125; <span class="keyword">from</span> <span class="string">'redux'</span>;</div><div class="line"><span class="keyword">import</span> &#123;signUp&#125; <span class="keyword">from</span> <span class="string">'signUp'</span>;</div><div class="line"><span class="keyword">import</span> &#123;signOut&#125; <span class="keyword">from</span> <span class="string">'signOut'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> reducers = combineReducers(&#123;</div><div class="line">    signUp,</div><div class="line">    signOut,</div><div class="line">  &#125;);</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> reducers;</div></pre></td></tr></table></figure>
+<p><code>Actions</code>：主要负责与后台的交互，并修改state的相关操作。</p>
+<blockquote>
+<p>建议在这里的方法都是用promise写，以免出现不必要的麻烦。<br>这里会有一个dispatch函数，这个函数的作用就是改变state的值，然后页面就会重新渲染。他的值时key，value。在redux中唯一能修改state的方法就是dispatch了。<br>在这个文件中还需要定义一个常量，用来定义他所对应的state。<br>还需设置一个修改方法，dispatch就是调用这个方法来修改state。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> UPDATE_STATUS = <span class="string">'UPDATE_STATUS'</span>;  <span class="comment">//reducer文件会调用到这个全局变量，也就是state了，其实一个页面中所有的方法都可以绑定到这上面</span></div><div class="line"><span class="keyword">const</span> update = <span class="function">(<span class="params">key,value</span>)=&gt;</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">type</span>:UPDATE_STATUS,</div><div class="line">        key,</div><div class="line">        value</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">const</span> init = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="function">(<span class="params">dispatch,getState</span>)=&gt;</span>&#123;		<span class="comment">//这两个参数也是写死的</span></div><div class="line">		...		<span class="comment">//交互方法</span></div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">const</span> submit = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="function">(<span class="params">dispatch,getState</span>)=&gt;</span>&#123;</div><div class="line">		...		<span class="comment">//交互方法</span></div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">export</span> &#123;init,submit&#125;;		<span class="comment">//这里填写的方法名是这里定义的一些方法，想要暴露那个就写到这里</span></div></pre></td></tr></table></figure>
+<p>路由使用<code>react-router</code>，由于是使用现成的所以就没怎么研究，先完成任务节点再说，以后再详细看。</p>
+<hr>
+<p>2017年7月3日08:59:56<br>补充react-router部分，不啰嗦，具体可以查看阮一峰的讲解，因为非常详细 <a href="http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu/" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/05/react_router.html?utm_source=tool.lu/</a></p>
+<hr>
+<p>2017年7月4日10:02:21<br>补充一下，这个渲染的经过是 先渲染Containers中的文件，因为它内部整合了网页Components和JS Actions。而改变参数的状态是由Reducer进行的。</p>
+<hr>
+<p>2017年7月5日11:05:20</p>
+<p>在一开始使用react+redux的过程中并没有发现一个细节，就是在reduver的时候用到了 <code>immutable</code> 这个工具包。这个包和react搭配简直爽到爆，去除了很多烦恼。<br>（具体可参考：<a href="https://www.zhihu.com/question/28016223" target="_blank" rel="external">https://www.zhihu.com/question/28016223</a> ）</p>
+<p>使用react，最重要关心的就是<strong>构建组件</strong>。组件要有<strong>封装性</strong>，且能对<strong>复用</strong>，<strong>测试</strong>和<strong>分离</strong>都最大程度的支持。各自组件有各自的状态，当状态发生改变时，会重新刷新组件改变内容。</p>
+<p><a href="https://github.com/kenberkeley/redux-simple-tutorial" target="_blank" rel="external">https://github.com/kenberkeley/redux-simple-tutorial</a>   可以看看这个加深一个对于redux的印象，总结的很不错。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/redux/" rel="tag"># redux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/05/issues/" rel="next" title="平时遇到的一些问题总结">
+                <i class="fa fa-chevron-left"></i> 平时遇到的一些问题总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/05/mongodb/" rel="prev" title="mongodb使用方法总结">
+                mongodb使用方法总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/useravatar.png"
+               alt="handsameliu" />
+          <p class="site-author-name" itemprop="name">handsameliu</p>
+           
+              <p class="site-description motion-element" itemprop="description">工作五年的初级程序员--自认为拥有小小的帅气 ^_^ </p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/handsameliu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2093882590" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">handsameliu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
