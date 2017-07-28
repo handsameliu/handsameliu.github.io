@@ -75,7 +75,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Testing," />
+  <meta name="keywords" content="总结,git,ssh," />
 
 
 
@@ -91,17 +91,17 @@
 
 
 
-<meta name="description" content="工作五年的初级程序员--自认为拥有小小的帅气 ^_^">
-<meta name="keywords" content="Testing">
+<meta name="description" content="ssh配置文件莫名其妙的出现了问题，可能由于在电脑上乱试版本管理工具导致的吧。 然后就是各种调，因为当前电脑会链接github和gitlab以及服务器，所以本地的ssh有点多，设置起来也费点时间。">
+<meta name="keywords" content="总结,git,ssh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="My New Post">
-<meta property="og:url" content="http://yoursite.com/2017/07/03/My-New-Post/index.html">
+<meta property="og:title" content="git突然无法连接提示公钥或密码错误的坑">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/git的坑1/index.html">
 <meta property="og:site_name" content="handsameliu">
-<meta property="og:description" content="工作五年的初级程序员--自认为拥有小小的帅气 ^_^">
-<meta property="og:updated_time" content="2017-07-04T06:46:11.551Z">
+<meta property="og:description" content="ssh配置文件莫名其妙的出现了问题，可能由于在电脑上乱试版本管理工具导致的吧。 然后就是各种调，因为当前电脑会链接github和gitlab以及服务器，所以本地的ssh有点多，设置起来也费点时间。">
+<meta property="og:updated_time" content="2017-07-28T02:21:37.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="My New Post">
-<meta name="twitter:description" content="工作五年的初级程序员--自认为拥有小小的帅气 ^_^">
+<meta name="twitter:title" content="git突然无法连接提示公钥或密码错误的坑">
+<meta name="twitter:description" content="ssh配置文件莫名其妙的出现了问题，可能由于在电脑上乱试版本管理工具导致的吧。 然后就是各种调，因为当前电脑会链接github和gitlab以及服务器，所以本地的ssh有点多，设置起来也费点时间。">
 
 
 
@@ -129,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/07/03/My-New-Post/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/07/28/git的坑1/"/>
 
 
 
 
 
-  <title>My New Post | handsameliu</title>
+  <title>git突然无法连接提示公钥或密码错误的坑 | handsameliu</title>
   
 
 
@@ -264,7 +264,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/03/My-New-Post/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/git的坑1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="handsameliu">
@@ -281,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">My New Post</h1>
+          <h1 class="post-title" itemprop="name headline">git突然无法连接提示公钥或密码错误的坑</h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T17:42:54+08:00">
-                2017-07-03
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-28T09:42:22+08:00">
+                2017-07-28
               </time>
             
 
@@ -316,8 +316,30 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Testing/" itemprop="url" rel="index">
-                    <span itemprop="name">Testing</span>
+                  <a href="/categories/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/git/ssh/" itemprop="url" rel="index">
+                    <span itemprop="name">ssh</span>
                   </a>
                 </span>
 
@@ -350,7 +372,35 @@
       
 
       
-        
+        <p>ssh配置文件莫名其妙的出现了问题，可能由于在电脑上乱试版本管理工具导致的吧。</p>
+<p>然后就是各种调，因为当前电脑会链接github和gitlab以及服务器，所以本地的ssh有点多，设置起来也费点时间。</p>
+<a id="more"></a>
+<p>那么今天遇到的问题就坑了</p>
+<ul>
+<li>ssh -T git@github.com        正常连接</li>
+<li>git pull origin master    提示密码不对无法连接</li>
+<li>各种查看后发现项目.git文件中的config文件中的 <code>remote &quot;origin&quot;</code>地址有误一个<code>:</code>被改成了<code>/</code>。导致找不到目录，我一看所有我之前用SourceTree配置过的项目都存在这样的情况。估计是当初病急乱投医乱配导致的。以下是处理方法</li>
+<li>可以先在指定的项目中 <code>git remote -v</code> 看到远程连接的地址，如果和你github中项目的ssh方式提供的网址一下那就不用往下看了。（这里的remote建议使用ssh的方式，就不用输密码了）</li>
+<li>在命令行运行<code>git remote rm origin</code> 删除远程连接</li>
+<li>在命令行运行<code>git remote add origin ssh方式的github项目地址</code> 重新添加一下即可</li>
+</ul>
+<hr>
+<p>前提：你要安装git，windowsCMD无法直接运行ssh命令。如果你之前配置过要重新配置相同网站的sshkey可以吧.ssh文件夹中的<code>known_hosts</code>改名或删掉，以免影响新的key</p>
+<p><strong>以github为例</strong></p>
+<p>首先需要直接打开gitbash，在命令行中输入<code>ssh-keygen -t rsa -C &quot;建议填注册网站时填写的邮箱&quot;</code></p>
+<blockquote>
+<p>ssh-keygen -t rsa -C “841489295@qq.com”</p>
+</blockquote>
+<p>然后会询问你生成的文件名，你可以指定也可以不指定（多ssh管理时建议指定）</p>
+<p>然后回车就可以了，他就会在<code>C:\Users\电脑用户名\.ssh</code>生成一个你指定名称的rsa文件</p>
+<p>取出已<code>.pub</code>为后缀的文件中的内容，添加到你的github或者gitlab以及其他以git版本管理为功能的网站中（一般叫SSHKey）</p>
+<p>添加后还有重要的一步，就是测试一下是否能连接成功，在命令行输入<code>ssh -T git@github.com</code>, 会让你输入网站登录的密码。显示如下即为正确。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ ssh -T git@github.com</div><div class="line">The authenticity of host &apos;github.com (192.30.255.112)&apos; can&apos;t be established.</div><div class="line">RSA key fingerprint is SHA256:nThbg........</div><div class="line">Are you sure you want to continue connecting (yes/no)? yes</div><div class="line">Warning: Permanently added &apos;github.com,192.30.255.112&apos; (RSA) to the list of known hosts.</div><div class="line">Enter passphrase for key &apos;C:\\Users\\acer\\.ssh\\github-rsa&apos;:</div><div class="line">Hi 你github上的用户名! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</div></pre></td></tr></table></figure>
+<p>操作完成后.ssh文件中的<code>known_hosts</code>文件中会写入一条你刚刚连接网站的记录。</p>
+<p>多sshkey使用时，还有更重要的一步，需要配置.ssh文件中的<code>config</code>文件，<code>每多一个sshkey就要配置一次</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Host github.com              建议输入你的网站名  不建议重复</div><div class="line">HostName github.com			 输入你网站的域名，既你克隆项目时，使用的ssh方式中url里@符号后面的地址</div><div class="line">IdentityFile C:\\Users\\acer\\.ssh\\github-rsa			你的rsa文件地址</div><div class="line">PreferredAuthentications publickey						照抄，意思是已公钥的方式</div><div class="line">User handsameliu			 用户名，可以填你网站的用户名，也可以填网址 不建议重复</div></pre></td></tr></table></figure>
+<p>完成后就可以正常clone了。</p>
+
       
     </div>
 
@@ -379,7 +429,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Testing/" rel="tag"># Testing</a>
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
           
         </div>
       
@@ -392,8 +446,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/03/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
+              <a href="/2017/07/25/vue安装/" rel="next" title="vue-cli笔记--安装">
+                <i class="fa fa-chevron-left"></i> vue-cli笔记--安装
               </a>
             
           </div>
@@ -401,10 +455,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/04/test语法/" rel="prev" title="test markdown 语法">
-                test markdown 语法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
