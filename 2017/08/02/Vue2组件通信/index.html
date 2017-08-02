@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="总结,Vue2," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="Vue2 组件之间的通信在父子组件通信中，无论是子级向父级传值，还是父级向子级传值，都是需要一个中间介质作为中转。 当父级向子级传值时需要用到props属性，子级向父级传值时需要用到自定义事件。这个结合了ng和react。相比之下Vue简单易懂。">
+<meta name="keywords" content="总结,Vue2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue2组件通信">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/Vue2组件通信/index.html">
+<meta property="og:site_name" content="handsameliu">
+<meta property="og:description" content="Vue2 组件之间的通信在父子组件通信中，无论是子级向父级传值，还是父级向子级传值，都是需要一个中间介质作为中转。 当父级向子级传值时需要用到props属性，子级向父级传值时需要用到自定义事件。这个结合了ng和react。相比之下Vue简单易懂。">
+<meta property="og:updated_time" content="2017-08-02T06:38:30.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue2组件通信">
+<meta name="twitter:description" content="Vue2 组件之间的通信在父子组件通信中，无论是子级向父级传值，还是父级向子级传值，都是需要一个中间介质作为中转。 当父级向子级传值时需要用到props属性，子级向父级传值时需要用到自定义事件。这个结合了ng和react。相比之下Vue简单易懂。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/02/Vue2组件通信/"/>
+
+
+
+
+
+  <title>Vue2组件通信 | handsameliu</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">handsameliu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">精神性洁癖的程序员</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/Vue2组件通信/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="handsameliu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/img/useravatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="handsameliu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue2组件通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T14:35:49+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/" itemprop="url" rel="index">
+                    <span itemprop="name">总结</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/总结/Vue2/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Vue2-组件之间的通信"><a href="#Vue2-组件之间的通信" class="headerlink" title="Vue2 组件之间的通信"></a>Vue2 组件之间的通信</h2><p>在父子组件通信中，无论是子级向父级传值，还是父级向子级传值，都是需要一个中间介质作为中转。</p>
+<p>当父级向子级传值时需要用到props属性，子级向父级传值时需要用到自定义事件。这个结合了ng和react。相比之下Vue简单易懂。</p>
+<a id="more"></a>
+<h3 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h3><p>首先来写一个子组件，在子组件的new Vue对象中添加props属性，在属性中以数组的形式写入父级要传输过来的属性名称。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;template lang=&quot;html&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt;</div><div class="line">        测量数据 &#123;&#123;message&#125;&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    export default &#123;</div><div class="line">        name:&apos;recordIndex&apos;,</div><div class="line">        props:[&apos;message&apos;]</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style scoped&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>写完后就可以写父组件了，需要在组件上绑定一个属性，这个属性就是子组件接收时所用的。然后将想要传递的内容写入到=之后即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;template lang=&quot;html&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt; </div><div class="line">        &lt;recordIndex v-bind:message=&apos;我是父级给子级传递的内容&apos;&gt;&lt;/recordIndex&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    import recordIndex from &apos;./components/recordIndex&apos;</div><div class="line">    export default &#123;</div><div class="line">        name:&apos;records&apos;,</div><div class="line">        components:&#123;recordIndex&#125;,</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style scoped&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>这样，一个简单的父级向子级组件传值的功能就做好了。</p>
+<blockquote>
+<p>子组件在props中创建一个属性，用以接收父组件传过来的值<br>父组件中注册子组件并在子组件标签中添加子组件props中创建的属性<br>把需要传给子组件的值赋给该属性即可</p>
+</blockquote>
+<h3 id="子级向父级传值"><a href="#子级向父级传值" class="headerlink" title="子级向父级传值"></a>子级向父级传值</h3><p>子级向父级传值就需要用到Vue自带的发射事件了。（ng也有这样的事件，不过只用过一次就被领导否决了，最后采用service和factory的方式进行父子通信）</p>
+<p>还是先来看子组件，这个例子时点击发送消息，所以需要在页面中添加一个button按钮并绑定事件，事件内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;template lang=&quot;html&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt;</div><div class="line">        &lt;button v-on:click=&quot;sendParentMsg&quot;&gt;点我给父级传值&lt;/button&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    export default &#123;</div><div class="line">        name:&apos;recordIndex&apos;,</div><div class="line">        methods:&#123;</div><div class="line">            sendParentMsg:function()&#123;</div><div class="line">                this.$emit(&apos;listenToChild&apos;,&apos;我这里是子组件发出的信息&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style scoped&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>这里用到了Vue自带的$emit方法，这个方法相当于广播，将内容发送出去。所需要的参数只有两个，一个是父级页面接受消息的方法另一个是想要传递的参数</p>
+<p>那么父级组件就需要在页面的子组件标签上定义并绑定一个名为<code>listenToChild</code>的方法，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">&lt;template lang=&quot;html&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt;</div><div class="line">        &lt;recordIndex v-on:listenToChild=&quot;showChildMsg&quot;&gt;&lt;/recordIndex&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    import recordIndex from &apos;./components/recordIndex&apos;</div><div class="line">    export default &#123;</div><div class="line">        name:&apos;records&apos;,</div><div class="line">        methods:&#123;</div><div class="line">            showChildMsg(msg)&#123;</div><div class="line">                alert(msg)</div><div class="line">            &#125;</div><div class="line">        &#125;,</div><div class="line">        components:&#123;recordIndex&#125;,</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style scoped&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>绑定事件后，就指定了子级组件的事件名称，然后就需要把事件内容指定为父级组件中自定义的接受方法了，</p>
+<p>然后再父级页面中点击子组件按钮即可，如果成功会弹出子组件发出的信息。</p>
+<blockquote>
+<p>子组件中需要手动触发一个自定义事件<br>将需要传的值作为$emit的第二个参数，该值将作为实参传给父级响应自定义事件的方法<br>在父组件中注册子组件并在子组件标签上绑定对自定义事件的监听</p>
+</blockquote>
+<h3 id="同级组件之间的通信"><a href="#同级组件之间的通信" class="headerlink" title="同级组件之间的通信"></a>同级组件之间的通信</h3><p>同级组件可以用中央事件总线的方式通信，原理就是使用一个全局的中间介质。需要使用到的方法有$emit发送，$on接收，$off结束监听。</p>
+<p>首先需要定义一个中间介质。</p>
+<p>可以在当前文件夹中定义，名为eventBus的js文件。文件内只创建一个Vue实例，它就承担起了组件之间通信的桥梁，也就是中央事件总线。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import Vue from &apos;vue&apos;;</div><div class="line">export default new Vue;</div></pre></td></tr></table></figure>
+<p>在a.js文件中建议写一个事件，这样可以清晰的控制。<br>在页面中引入之前定义好的介质文件eventBus.js。<br>事件方法中使用介质eventBus.$emit事件，将同级文件接收的自定义事件sendMsg和内容发射出去。<br>PS:$emit实例方法触发当前实例(这里的当前实例就是eventBus)上的事件,附加参数都会传给监听器回调。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;template&gt;</div><div class="line">	&lt;div class=&quot;timeline-demo&quot;&gt;</div><div class="line">		&lt;button type=&quot;primary&quot; v-on:click=&apos;sendMsg&apos;&gt;给其他组件传值&lt;/button&gt;</div><div class="line">	&lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line"></div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">    import eventBus from &apos;./eventBus&apos;</div><div class="line">    export default &#123;</div><div class="line">        name:&apos;recordTimeLine&apos;,</div><div class="line">        methods:&#123;</div><div class="line">            sendMsg()&#123;</div><div class="line">                var _this = this;</div><div class="line">                eventBus.$emit(&apos;childMsg&apos;,&apos;my name is username&apos;)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style lang=&quot;less&quot;&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>在b.js文件中也需要在mounted中写一个用于接收的监听事件,用来监听a页面发射出的childMsg事件。<br><code>$on</code>：第一个参数是a页面$emit发射的第一个参数，第二个参数是一个回调方法，用于接收并操作$emit传递的参数<br>mounted:是一个Vue生命周期中的钩子函数，简单点说就类似于jquery的ready，Vue会在文档加载完毕后调用mounted函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">&lt;template lang=&quot;html&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt;</div><div class="line">        &#123;&#123;message&#125;&#125;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    import eventBus from &apos;./eventBus&apos; </div><div class="line">    export default &#123;</div><div class="line">        name:&apos;recordIndex&apos;,</div><div class="line">		data()&#123;</div><div class="line">			return&#123;</div><div class="line">				message:&apos;我是初始值&apos;</div><div class="line">			&#125;</div><div class="line">		&#125;,</div><div class="line">        mounted()&#123;</div><div class="line">            let _this = this;</div><div class="line">            eventBus.$on(&apos;childMsg&apos;,(msg) =&gt; &#123;</div><div class="line">                _this.message = msg;</div><div class="line">            &#125;)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style scoped&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>当两个组件写好后就需要用到一个放置两个组件的容器了，接下来创建一个index组件来存放a，b组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;template lang=&quot;html&quot;&gt;</div><div class="line">    &lt;div id=&quot;app&quot;&gt;</div><div class="line">        &lt;recordIndex&gt;&lt;/recordIndex&gt;</div><div class="line">        &lt;recordTimeLine&gt;&lt;/recordTimeLine&gt;</div><div class="line">    &lt;/div&gt;</div><div class="line">&lt;/template&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    import recordTimeLine from &apos;./components/recordTimeLine&apos;</div><div class="line">    import recordIndex from &apos;./components/recordIndex&apos;</div><div class="line">    export default &#123;</div><div class="line">        name:&apos;records&apos;,</div><div class="line">        components:&#123;recordTimeLine,recordIndex&#125;,</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;style scoped&gt;</div><div class="line">&lt;/style&gt;</div></pre></td></tr></table></figure>
+<p>这样当点击a组件的button时，触发了发射事件，b组件就可以接收并绑定显示到页面了</p>
+<blockquote>
+<p>创建一个事件总线，例如demo中的eventBus，用它作为通信桥梁<br>在需要传值的组件中用eventBus.$emit触发一个自定义事件，并传递参数<br>在需要接收数据的组件中用eventBus.$on监听自定义事件，并在回调函数中处理传递过来的参数</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+            <a href="/tags/Vue2/" rel="tag"># Vue2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/28/git的坑1/" rel="next" title="git突然无法连接提示公钥或密码错误的坑">
+                <i class="fa fa-chevron-left"></i> git突然无法连接提示公钥或密码错误的坑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/useravatar.png"
+               alt="handsameliu" />
+          <p class="site-author-name" itemprop="name">handsameliu</p>
+           
+              <p class="site-description motion-element" itemprop="description">工作五年的初级程序员--自认为拥有小小的帅气 ^_^ </p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/handsameliu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2093882590" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue2-组件之间的通信"><span class="nav-number">1.</span> <span class="nav-text">Vue2 组件之间的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#父组件向子组件传值"><span class="nav-number">1.1.</span> <span class="nav-text">父组件向子组件传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子级向父级传值"><span class="nav-number">1.2.</span> <span class="nav-text">子级向父级传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同级组件之间的通信"><span class="nav-number">1.3.</span> <span class="nav-text">同级组件之间的通信</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">handsameliu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
