@@ -91,7 +91,7 @@
 
 
 
-<meta name="description" content="CSS（层叠样式表）是一门历史悠久的标记性语言，同 HTML 一道，被广泛应用于万维网（World Wide Web）中。HTML 主要负责文档结构的定义，CSS 负责文档表现形式或样式的定义。 作为一门标记性语言，CSS 的语法相对简单，对使用者的要求较低，但同时也带来一些问题：CSS 需要书写大量看似没有逻辑的代码">
+<meta name="description" content="CSS（层叠样式表）是一门历史悠久的标记性语言，同 HTML 一道，被广泛应用于万维网（World Wide Web）中。HTML 主要负责文档结构的定义，CSS 负责文档表现形式或样式的定义。 作为一门标记性语言，CSS 的语法相对简单，对使用者的要求较低，但同时也带来一些问题：CSS 需要书写大量看似没有逻辑的代码，不方便维护及扩展，不利于复用，尤其对于非前端开发工程师来讲，往往会因为缺少 C">
 <meta name="keywords" content="less,css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="less-笔记">
@@ -634,7 +634,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -645,7 +645,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -656,7 +656,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -711,7 +711,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在客户端使用"><span class="nav-number">1.</span> <span class="nav-text">在客户端使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在服务器端使用"><span class="nav-number">2.</span> <span class="nav-text">在服务器端使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用编译生成的静态-CSS-文件"><span class="nav-number">2.1.</span> <span class="nav-text">使用编译生成的静态 CSS 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在命令行下使用"><span class="nav-number">2.4.</span> <span class="nav-text">在命令行下使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合"><span class="nav-number">4.</span> <span class="nav-text">混合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments-变量"><span class="nav-number">4.1.</span> <span class="nav-text">@arguments 变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式匹配和导引表达式"><span class="nav-number">5.</span> <span class="nav-text">模式匹配和导引表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引导"><span class="nav-number">5.1.</span> <span class="nav-text">引导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套"><span class="nav-number">6.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-amp-运算"><span class="nav-number">7.</span> <span class="nav-text">函数&运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Color-函数"><span class="nav-number">7.1.</span> <span class="nav-text">Color 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-函数"><span class="nav-number">7.2.</span> <span class="nav-text">Math 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间"><span class="nav-number">8.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">9.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">10.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Importing"><span class="nav-number">11.</span> <span class="nav-text">Importing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串插值"><span class="nav-number">12.</span> <span class="nav-text">字符串插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免编译"><span class="nav-number">13.</span> <span class="nav-text">避免编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-表达式"><span class="nav-number">14.</span> <span class="nav-text">JavaScript 表达式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在客户端使用"><span class="nav-number">1.</span> <span class="nav-text">在客户端使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在服务器端使用"><span class="nav-number">2.</span> <span class="nav-text">在服务器端使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用编译生成的静态-CSS-文件"><span class="nav-number">2.1.</span> <span class="nav-text">使用编译生成的静态 CSS 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用"><span class="nav-number">2.2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在命令行下使用"><span class="nav-number">2.4.</span> <span class="nav-text">在命令行下使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量"><span class="nav-number">3.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#混合"><span class="nav-number">4.</span> <span class="nav-text">混合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#arguments-变量"><span class="nav-number">4.1.</span> <span class="nav-text">@arguments 变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模式匹配和导引表达式"><span class="nav-number">5.</span> <span class="nav-text">模式匹配和导引表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引导"><span class="nav-number">5.1.</span> <span class="nav-text">引导</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#嵌套"><span class="nav-number">6.</span> <span class="nav-text">嵌套</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数-amp-运算"><span class="nav-number">7.</span> <span class="nav-text">函数&amp;运算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Color-函数"><span class="nav-number">7.1.</span> <span class="nav-text">Color 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-函数"><span class="nav-number">7.2.</span> <span class="nav-text">Math 函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名空间"><span class="nav-number">8.</span> <span class="nav-text">命名空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">9.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注释"><span class="nav-number">10.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Importing"><span class="nav-number">11.</span> <span class="nav-text">Importing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串插值"><span class="nav-number">12.</span> <span class="nav-text">字符串插值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#避免编译"><span class="nav-number">13.</span> <span class="nav-text">避免编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript-表达式"><span class="nav-number">14.</span> <span class="nav-text">JavaScript 表达式</span></a></li></ol></div>
             
 
           </div>
@@ -734,7 +734,7 @@
         <div class="copyright" >
   
   &copy;  2015 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
