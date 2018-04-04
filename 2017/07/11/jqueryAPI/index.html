@@ -446,7 +446,7 @@ $(&apos;div2&apos;).after(&apos;div1&apos;);
 <p>jquery的设计思想就是把<code>事件绑定到元素上</code>。</p>
 </blockquote>
 <p>例如：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'a'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">　　　　alert(<span class="string">'Hello'</span>);</div><div class="line">　　&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">　　　　alert(<span class="string">'Hello'</span>);</span><br><span class="line">　　&#125;);</span><br></pre></td></tr></table></figure>
 <p>事件列表：</p>
 <p><code>.click();</code>单击事件</p>
 <p><code>.change();</code>当指定元素内容改变后触发</p>
@@ -475,9 +475,9 @@ $(&apos;div2&apos;).after(&apos;div1&apos;);
 <p><code>.unload();</code>用户离开页面时触发</p>
 <p>以上事件在jquery中都是用<code>bind</code>方法绑定的，它可以更灵活的控制事件。</p>
 <p>比如你可以为多个事件绑定同一个函数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'input'</span>).bind(</div><div class="line">　　　　<span class="string">'click change'</span>, <span class="comment">//同时绑定click和change事件</span></div><div class="line">　　　　<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">　　　　　　alert(<span class="string">'Hello'</span>);</div><div class="line">　　　　&#125;</div><div class="line">　　);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'input'</span>).bind(</span><br><span class="line">　　　　<span class="string">'click change'</span>, <span class="comment">//同时绑定click和change事件</span></span><br><span class="line">　　　　<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">　　　　　　alert(<span class="string">'Hello'</span>);</span><br><span class="line">　　　　&#125;</span><br><span class="line">　　);</span><br></pre></td></tr></table></figure>
 <p>有时你指向让他运行一次，可以使用<code>one()</code>方法</p>
-<p><code>`javascript</code><br>    $(“p”).one(“click”, function() {<br>　　　　alert(“Hello”); //只运行一次，以后的点击不会运行<br>　　});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">可使用 `.unbind()` 解除事件绑定</div><div class="line"></div><div class="line">所有的事件处理函数，都可以接受一个事件对象(event object)作为参数，比如下面例子中的&apos;e&apos;:</div><div class="line"></div><div class="line">```javascript</div><div class="line">    $(&quot;p&quot;).click(function(e) &#123;</div><div class="line">        //event 事件对象</div><div class="line">　　　　alert(e.type); // &quot;click&quot;</div><div class="line">　　&#125;);</div></pre></td></tr></table></figure></p>
+<p><code></code>javascript`<br>    $(“p”).one(“click”, function() {<br>　　　　alert(“Hello”); //只运行一次，以后的点击不会运行<br>　　});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">可使用 `.unbind()` 解除事件绑定</span><br><span class="line"></span><br><span class="line">所有的事件处理函数，都可以接受一个事件对象(event object)作为参数，比如下面例子中的&apos;e&apos;:</span><br><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">    $(&quot;p&quot;).click(function(e) &#123;</span><br><span class="line">        //event 事件对象</span><br><span class="line">　　　　alert(e.type); // &quot;click&quot;</span><br><span class="line">　　&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>这个event事件对象有许多的有用的方法和属性可以使用：</p>
 <p><code>event.pageX</code>  事件发生时，鼠标距离网页左上角的水平定位</p>
 <p><code>event.pageY</code>  事件发生时，鼠标距离网页左上角的垂直定位</p>
@@ -488,7 +488,7 @@ $(&apos;div2&apos;).after(&apos;div1&apos;);
 <p><code>event.stopPropagation()</code>  阻止冒泡</p>
 <p><code>event.preventDefault()</code>   阻止默认行为</p>
 <p>在事件的处理过程中，可以使用this关键字，返回事件针对的dom元素：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'a'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">　　　　<span class="keyword">if</span> ($(<span class="keyword">this</span>).attr(<span class="string">'href'</span>).match(<span class="string">'evil'</span>)) &#123; <span class="comment">//如果确认为有害链接</span></div><div class="line">　　　　　　e.preventDefault(); <span class="comment">//阻止打开</span></div><div class="line">　　　　　　$(<span class="keyword">this</span>).addClass(<span class="string">'evil'</span>); <span class="comment">//加上表示有害的class</span></div><div class="line">　　　　&#125;</div><div class="line">　　&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'a'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">　　　　<span class="keyword">if</span> ($(<span class="keyword">this</span>).attr(<span class="string">'href'</span>).match(<span class="string">'evil'</span>)) &#123; <span class="comment">//如果确认为有害链接</span></span><br><span class="line">　　　　　　e.preventDefault(); <span class="comment">//阻止打开</span></span><br><span class="line">　　　　　　$(<span class="keyword">this</span>).addClass(<span class="string">'evil'</span>); <span class="comment">//加上表示有害的class</span></span><br><span class="line">　　　　&#125;</span><br><span class="line">　　&#125;);</span><br></pre></td></tr></table></figure>
 <p>有两种方法可以出发一个事件，一种是直接触发，另一种是使用trigger()或者trigger Handler()：</p>
 <pre><code>$(&apos;id&apos;).click();
 $(&apos;id&apos;).trigger(&apos;click&apos;);
@@ -505,7 +505,7 @@ $(&apos;id&apos;).trigger(&apos;click&apos;);
 <pre><code>$(&apos;id&apos;).fadeIn(300);  300毫秒内淡入
 $(&apos;id&apos;).fadeIn(&apos;slow&apos;);  换面的淡出
 </code></pre><p>特效结束后还能指定接下来运行的函数:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'p'</span>).fadeOut(<span class="number">300</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </div><div class="line">    $(<span class="keyword">this</span>).remove(); </div><div class="line">&#125;);  <span class="comment">//更复杂的特效，可以用.animate()自定义。</span></div><div class="line">$(<span class="string">'div'</span>).animate(</div><div class="line">    &#123;</div><div class="line">        <span class="attr">left</span> : <span class="string">"+=50"</span>, <span class="comment">//不断右移</span></div><div class="line">        opacity : <span class="number">0.25</span> <span class="comment">//指定透明度</span></div><div class="line">    &#125;,</div><div class="line">    <span class="number">300</span>, <span class="comment">// 持续时间</span></div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; alert(<span class="string">'done!'</span>); &#125; <span class="comment">//回调函数</span></div><div class="line">);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'p'</span>).fadeOut(<span class="number">300</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    $(<span class="keyword">this</span>).remove(); </span><br><span class="line">&#125;);  <span class="comment">//更复杂的特效，可以用.animate()自定义。</span></span><br><span class="line">$(<span class="string">'div'</span>).animate(</span><br><span class="line">    &#123;</span><br><span class="line">        left : <span class="string">"+=50"</span>, <span class="comment">//不断右移</span></span><br><span class="line">        opacity : <span class="number">0.25</span> <span class="comment">//指定透明度</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="number">300</span>, <span class="comment">// 持续时间</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; alert(<span class="string">'done!'</span>); &#125; <span class="comment">//回调函数</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p><code>.stop()</code>和<code>.delay()</code>用来停止或延缓特效的执行</p>
 <p>$.fx.off如果设置为true，则关闭页面特效</p>
 
@@ -552,8 +552,8 @@ $(&apos;id&apos;).fadeIn(&apos;slow&apos;);  换面的淡出
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/05/sass语法/" rel="next" title="sass">
-                <i class="fa fa-chevron-left"></i> sass
+              <a href="/2017/07/04/mooc-es6/" rel="next" title="mooc_es6">
+                <i class="fa fa-chevron-left"></i> mooc_es6
               </a>
             
           </div>
@@ -562,8 +562,8 @@ $(&apos;id&apos;).fadeIn(&apos;slow&apos;);  换面的淡出
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/25/vue安装/" rel="prev" title="vue-cli笔记--安装">
-                vue-cli笔记--安装 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/17/angular/" rel="prev" title="angular">
+                angular <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
